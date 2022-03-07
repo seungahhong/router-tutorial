@@ -1,0 +1,20 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+
+  > button {
+    display: block;
+    min-width: 50px;
+    height: 50px;
+    margin: 10px;
+    cursor: pointer;
+    padding: 0 5px;
+  }
+}
