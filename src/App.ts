@@ -5,7 +5,9 @@ export function init(): void {
 
   const _init = () => {
     if (!controller) {
-      controller = new Controller();
+      controller = new Controller(
+        window.location.href.substring(window.location.href.lastIndexOf('/')),
+      );
       controller.init();
     }
   };

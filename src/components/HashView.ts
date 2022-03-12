@@ -11,24 +11,46 @@ export default class HashView extends View {
     this.renderView(type);
   }
 
-  bindEvent() {
-    this.navigation = document.getElementById('navigation') as HTMLUListElement;
+  bindEvent(): void {
+    // const navigation = document.getElementById(
+    //   'navigation',
+    // ) as HTMLUListElement;
 
     // 네비게이션을 클릭하면 주소창의 url이 변경되므로 HTTP 요청이 서버로 전송된다.
-    // preventDefault를 사용하여 이를 방지하고 history 관리를 위한 처리를 실행한다.
 
-    this.navigation.addEventListener('click', (e) => {
-      const target = e.target as HTMLAnchorElement;
-      if (!target.matches('#navigation > li > a')) return;
+    // navigation.addEventListener('click', (e) => {
+    //   const target = e.target as HTMLAnchorElement;
+    //   if (!target.matches('#navigation > li > a')) return;
 
-      e.preventDefault();
+    //   // 이동할 페이지의 path
+    //   const href = target.getAttribute('href') as string;
+    //   const path = href.substring(href.lastIndexOf('#'));
 
-      // 이동할 페이지의 path
-      const href = target.getAttribute('href') as string;
-      const path = href.substring(href.lastIndexOf('/'));
+    //   renderComponent(path, this.selectType);
+    // });
+
+    window.addEventListener('hashchange', (event: HashChangeEvent) => {
+      const href = event.newURL;
+
+      if (href.lastIndexOf('#') === -1) {
+        window.location.href = '/push';
+      }
+
+      const path = href.substring(href.lastIndexOf('#'));
 
       renderComponent(path, this.selectType);
     });
+  }
+
+  unBindEvent(): void {
+    // const navigation = document.getElementById(
+    //   'navigation',
+    // ) as HTMLUListElement;
+    // if (navigation) {
+    //   navigation.removeEventListener('click', () => {});
+    // }
+
+    window.removeEventListener('hashchange', () => {});
   }
 
   destroy() {}
@@ -36,16 +58,12 @@ export default class HashView extends View {
   renderView(type: ButtonType) {
     super.render({
       title: 'Hash Router',
-      homeLink: '/#',
-      aboutLink: '/#about',
+      homeLink: '#',
+      aboutLink: '#about',
     });
 
     this.selectType = type;
-    this.bindEvent();
-    renderComponent(
-      window.location.href.substring(window.location.href.lastIndexOf('/')),
-      type,
-    );
+    renderComponent('#', type);
 
     return this;
   }

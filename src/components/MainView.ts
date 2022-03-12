@@ -5,23 +5,6 @@ import HashView from './HashView';
 import PushView from './PushView';
 import { renderComponent } from './View';
 
-window.addEventListener('popstate', () => {
-  console.log('[popstate]', window.location.pathname);
-
-  const href = window.location.href;
-  const path = href.substring(href.lastIndexOf('/'));
-
-  // 앞으로/뒤로 가기 버튼을 클릭하면 window.location.pathname를 참조해 뷰를 전환한다.
-  renderComponent(
-    path,
-    path.indexOf('ajax') >= 0
-      ? 'AJAX'
-      : path.indexOf('#') >= 0
-      ? 'HASH'
-      : 'PUSHSTATE',
-  );
-});
-
 export default class MainView {
   ajaxView: AjaxView;
   hashView: HashView;
@@ -32,9 +15,9 @@ export default class MainView {
   pushStateButton: HTMLButtonElement;
 
   constructor(selectType: ButtonType) {
-    this.ajaxView = new AjaxView(selectType);
-    this.hashView = new HashView(selectType);
-    this.pushStateView = new PushView(selectType);
+    this.ajaxView = new AjaxView('AJAX');
+    this.hashView = new HashView('HASH');
+    this.pushStateView = new PushView('PUSHSTATE');
 
     this.root = document.getElementById('root') as HTMLElement;
     this.ajaxButton = document.getElementById('ajax') as HTMLButtonElement;
@@ -49,19 +32,13 @@ export default class MainView {
   init(selectType: ButtonType) {
     if (selectType === 'AJAX') {
       this.ajaxView.renderView('AJAX');
+      this.ajaxView.bindEvent();
     } else if (selectType === 'HASH') {
       this.hashView.renderView('HASH');
+      this.hashView.bindEvent();
     } else {
       this.pushStateView.renderView('PUSHSTATE');
-    }
-
-    if (window.location.href === '/') {
-      window.location.href =
-        selectType === 'AJAX'
-          ? '/ajax'
-          : selectType === 'HASH'
-          ? '/#'
-          : '/push';
+      this.pushStateView.bindEvent();
     }
 
     this.style(selectType);

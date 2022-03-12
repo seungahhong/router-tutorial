@@ -2,8 +2,8 @@ export type ButtonType = 'AJAX' | 'HASH' | 'PUSHSTATE';
 
 export interface HtmlProps {
   title: string;
-  homeLink: string;
-  aboutLink: string;
+  homeLink?: string;
+  aboutLink?: string;
 }
 
 export const getHtml = ({ title, homeLink, aboutLink }: HtmlProps) => `
@@ -14,5 +14,10 @@ export const getHtml = ({ title, homeLink, aboutLink }: HtmlProps) => `
       <li><a id="${aboutLink}" href="${aboutLink}">About</a></li>
     </ul>
   </nav>
+  <div id="template"></div>
+`;
+
+export const getAjaxHtml = ({ title }: HtmlProps) => `
+  <h1 style="font-size: 20px; margin-bottom: 20px;">${title}</h1>
   <div id="template"></div>
 `;

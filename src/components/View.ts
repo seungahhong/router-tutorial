@@ -1,13 +1,13 @@
-import { ButtonType, getHtml, HtmlProps } from '../constant/html';
+import { ButtonType, getAjaxHtml, getHtml, HtmlProps } from '../constant/html';
 import { eventHandler } from '../helpers/events';
 import { on, emit, remove } from '../helpers/events';
 import { About, Home, NotFound } from './Template';
 
-const routes = [
+export const routes = [
   { path: '/push', component: Home },
   { path: '/push-about', component: About },
-  { path: '/#', component: Home },
-  { path: '/#about', component: About },
+  { path: '#', component: Home },
+  { path: '#about', component: About },
   { path: '/ajax', component: Home },
   { path: '/ajax-about', component: About },
 ];
@@ -22,7 +22,9 @@ export const renderComponent = async (path: string, type: ButtonType) => {
     document.querySelectorAll('a').forEach((item: HTMLAnchorElement) => {
       item.style.color = 'black';
     });
-    (document.getElementById(path) as HTMLElement).style.color = 'red';
+    if (document.getElementById(path)) {
+      (document.getElementById(path) as HTMLElement).style.color = 'red';
+    }
   } catch (err) {
     console.error(err);
   }
@@ -31,11 +33,9 @@ export const renderComponent = async (path: string, type: ButtonType) => {
 export default class View {
   element: HTMLElement;
   routers: any;
-  navigation: HTMLUListElement | null;
 
   constructor(element: HTMLElement) {
     this.element = element;
-    this.navigation = document.getElementById('navigation') as HTMLUListElement;
   }
 
   on(eventName: string, handler: eventHandler<Event>) {
@@ -56,7 +56,12 @@ export default class View {
   }
 
   render({ title, homeLink, aboutLink }: HtmlProps) {
-    this.element.innerHTML = getHtml({ title, homeLink, aboutLink });
+    this.element.innerHTML =
+      homeLink && aboutLink
+        ? getHtml({ title, homeLink, aboutLink })
+        : getAjaxHtml({ title });
     return this;
   }
+  bindEvent() {}
+  unBindEvent() {}
 }

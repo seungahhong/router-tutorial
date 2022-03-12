@@ -1,19 +1,24 @@
 export type eventHandler<T extends Event> = (event: T) => void;
+export type hashEventHandler<T extends HashChangeEvent> = (event: T) => void;
 
 export function on(
-  target: HTMLElement,
+  target: HTMLElement | Window,
   eventName: string,
   handler: eventHandler<Event>,
 ) {
-  target.addEventListener(eventName, handler);
+  if (target) {
+    target.addEventListener(eventName, handler);
+  }
 }
 
 export function remove(
-  target: HTMLElement,
+  target: HTMLElement | Window,
   eventName: string,
   handler: eventHandler<Event>,
 ) {
-  target.removeEventListener(eventName, handler);
+  if (target) {
+    target.removeEventListener(eventName, handler);
+  }
 }
 
 export function emit(target: HTMLElement, eventName: string, value?: string) {

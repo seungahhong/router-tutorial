@@ -3,21 +3,26 @@ import { ButtonType } from './constant/html';
 
 class Controller {
   mainView: MainView | null;
+  selectType: ButtonType;
 
-  constructor() {
-    if (!localStorage.getItem('selectType')) {
-      localStorage.setItem('selectType', 'HASH');
+  constructor(path: string) {
+    if (path === '/') {
+      window.location.href = '/push';
     }
 
-    this.mainView = new MainView(
-      localStorage.getItem('selectType') as ButtonType,
-    );
+    this.selectType =
+      path.indexOf('/ajax') >= 0
+        ? 'AJAX'
+        : path.indexOf('#') >= 0
+        ? 'HASH'
+        : 'PUSHSTATE';
+    this.mainView = new MainView(this.selectType);
   }
 
   init() {
     this.mainView?.bindEvent();
     this.mainView?.on('@click', (event) => {
-      localStorage.setItem('selectType', (event as CustomEvent).detail);
+      this.selectType = (event as CustomEvent).detail;
     });
   }
 
