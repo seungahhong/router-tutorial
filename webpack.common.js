@@ -4,6 +4,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlMinimizerPlugin = require('html-minimizer-webpack-plugin');
 
 module.exports = {
   // entry file
@@ -65,6 +66,10 @@ module.exports = {
       title: 'router-tutorial',
       filename: 'index.html', // output으로 출력할 파일은 index.html 이다.
       template: path.resolve(__dirname, 'public', 'index.html'),
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+      },
     }),
     new MiniCssExtractPlugin({
       filename: '[hash].css',
@@ -76,8 +81,13 @@ module.exports = {
         {
           context: path.resolve(__dirname, 'public/subhtml'),
           from: '**/*.html',
+          to: 'link/',
         },
       ],
     }),
   ],
+  optimization: {
+    minimize: true,
+    minimizer: [new HtmlMinimizerPlugin()],
+  },
 };

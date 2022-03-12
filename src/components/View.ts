@@ -1,4 +1,10 @@
-import { ButtonType, getAjaxHtml, getHtml, HtmlProps } from '../constant/html';
+import {
+  ButtonType,
+  getAjaxHtml,
+  getHtml,
+  getPushHtml,
+  HtmlProps,
+} from '../constant/html';
 import { eventHandler } from '../helpers/events';
 import { on, emit, remove } from '../helpers/events';
 import { About, Home, NotFound } from './Template';
@@ -55,11 +61,13 @@ export default class View {
     return this;
   }
 
-  render({ title, homeLink, aboutLink }: HtmlProps) {
+  render({ title, homeLink, aboutLink }: HtmlProps, type: ButtonType) {
     this.element.innerHTML =
-      homeLink && aboutLink
+      type === 'AJAX'
+        ? getAjaxHtml({ title })
+        : type === 'HASH'
         ? getHtml({ title, homeLink, aboutLink })
-        : getAjaxHtml({ title });
+        : getPushHtml({ title, homeLink, aboutLink });
     return this;
   }
   bindEvent() {}

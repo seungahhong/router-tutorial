@@ -16,7 +16,7 @@ export default class AjaxView extends View {
   renderView(type: ButtonType) {
     super.render({
       title: 'Ajax Router',
-    });
+    }, this.selectType);
 
     this.selectType = type;
     renderComponent('/ajax', type);

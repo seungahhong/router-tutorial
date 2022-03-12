@@ -56,14 +56,21 @@ export default class HashView extends View {
   destroy() {}
 
   renderView(type: ButtonType) {
-    super.render({
-      title: 'Hash Router',
-      homeLink: '#',
-      aboutLink: '#about',
-    });
+    super.render(
+      {
+        title: 'Hash Router',
+        homeLink: '#',
+        aboutLink: '#about',
+      },
+      this.selectType,
+    );
 
     this.selectType = type;
-    renderComponent('#', type);
+    const href = window.location.href;
+    if (href.lastIndexOf('#') !== -1) {
+      const path = href.substring(href.lastIndexOf('#'));
+      renderComponent(path, type);
+    }
 
     return this;
   }

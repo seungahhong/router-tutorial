@@ -3,7 +3,6 @@ import { emit, eventHandler, on } from '../helpers/events';
 import AjaxView from './AjaxView';
 import HashView from './HashView';
 import PushView from './PushView';
-import { renderComponent } from './View';
 
 export default class MainView {
   ajaxView: AjaxView;

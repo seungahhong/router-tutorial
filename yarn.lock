@@ -1124,7 +1124,7 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
-"@types/html-minifier-terser@^6.0.0":
+"@types/html-minifier-terser@^6.0.0", "@types/html-minifier-terser@^6.1.0":
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/@types/html-minifier-terser/-/html-minifier-terser-6.1.0.tgz#4fc33a00c1d0c16987b1a20cf92d20614c55ac35"
   integrity sha512-oh/6byDPnL1zeNXFrDXFLyZjkr1MsBG667IM792caf1L2UPOOMf65NFzjUH/ltyfwjAGfs1rsX1eftK0jC/KIg==
@@ -3235,7 +3235,7 @@ html-loader@^3.1.0:
     html-minifier-terser "^6.0.2"
     parse5 "^6.0.1"
 
-html-minifier-terser@^6.0.2:
+html-minifier-terser@^6.0.0, html-minifier-terser@^6.0.2:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/html-minifier-terser/-/html-minifier-terser-6.1.0.tgz#bfc818934cc07918f6b3669f5774ecdfd48f32ab"
   integrity sha512-YXxSlJBZTP7RS3tWnQw74ooKa6L9b9i9QYXY21eUEvhZ3u9XLfv6OnFsQq6RxkhHygsaUMvYsZRV5rU/OVNZxw==
@@ -3247,6 +3247,17 @@ html-minifier-terser@^6.0.2:
     param-case "^3.0.4"
     relateurl "^0.2.7"
     terser "^5.10.0"
+
+html-minimizer-webpack-plugin@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/html-minimizer-webpack-plugin/-/html-minimizer-webpack-plugin-3.5.0.tgz#47d37acfe01cbd07b7c2d4a3d47be2402a60e516"
+  integrity sha512-i5vQ0vD5Zk9WvCXTDjwtw/Yqb9jJHvJrJ2Q+hLJJGM0RnaDziaH95/CkcAdPxL/qyAkgpuyuEEmcnrLGNcjedQ==
+  dependencies:
+    "@types/html-minifier-terser" "^6.1.0"
+    html-minifier-terser "^6.0.0"
+    jest-worker "^27.0.6"
+    schema-utils "^4.0.0"
+    serialize-javascript "^6.0.0"
 
 html-webpack-plugin@^5.5.0:
   version "5.5.0"
@@ -3613,7 +3624,7 @@ isstream@~0.1.2:
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
   integrity sha1-R+Y/evVa+m+S4VAOaQ64uFKcCZo=
 
-jest-worker@^27.4.5:
+jest-worker@^27.0.6, jest-worker@^27.4.5:
   version "27.5.1"
   resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-27.5.1.tgz#8d146f0900e8973b106b6f73cc1e9a8cb86f8db0"
   integrity sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==
