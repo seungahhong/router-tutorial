@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   // entry file
@@ -70,5 +71,13 @@ module.exports = {
     }),
     new OptimizeCSSAssetsPlugin({}),
     new CleanWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          context: path.resolve(__dirname, 'public/subhtml'),
+          from: '**/*.html',
+        },
+      ],
+    }),
   ],
 };

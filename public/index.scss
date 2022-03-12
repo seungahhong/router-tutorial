@@ -5,9 +5,23 @@ body {
   overflow: hidden;
 }
 
-main {
+body {
+  margin-top: 30px;
+}
+
+main > ul {
   display: flex;
   justify-content: center;
+
+  li {
+    margin-right: 10px;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 
   > button {
     display: block;
