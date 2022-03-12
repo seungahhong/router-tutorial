@@ -17,11 +17,6 @@ export const getHtml = ({ title, homeLink, aboutLink }: HtmlProps) => `
   <div id="template"></div>
 `;
 
-export const getAjaxHtml = ({ title }: HtmlProps) => `
-  <h1 style="font-size: 20px; margin-bottom: 20px;">${title}</h1>
-  <div id="template"></div>
-`;
-
 export const getPushHtml = ({ title, homeLink, aboutLink }: HtmlProps) => `
     <h1 style="font-size: 20px; margin-bottom: 20px;">${title}</h1>
     <nav>

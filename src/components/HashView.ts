@@ -1,5 +1,4 @@
 import { ButtonType } from '../constant/html';
-import { About, Home } from './Template';
 import View, { renderComponent } from './View';
 
 export default class HashView extends View {
